@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Config
+clusters:                                                                                                                                
+- name: k3s
+  cluster:                                                                                                                               
+    insecure-skip-tls-verify: true                                                                                                       
+    server: https://${server_ip}:6443                                                                                               
+contexts:
+- context:
+    cluster: k3s
+    user: k3s-admin
+  name: k3s
+current-context: k3s
+users:
+- name: k3s-admin
+  user:
+    password: ${admin_password}
+    username: admin
+# comment-1
