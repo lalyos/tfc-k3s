@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+command -v kubectl >/dev/null 2>&1 || exit 0
+
 : ${ctx:=k3s-tf}
 : ${server_ip? reuired}
 : ${admin_password? reuired}
