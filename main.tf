@@ -12,7 +12,7 @@ data "google_compute_image" "k3s_image" {
 data "external" "password" {
   depends_on = [google_compute_instance.default]
   program = ["./get-password.sh"]
-
+  
   query = {
     server_ip = google_compute_address.static.address
   }
@@ -50,6 +50,26 @@ resource "local_file" "user-data" {
         k3os_token    = var.k3os_token
       }
     )
+}
+
+resource "local_file" "ssh_priv_key" {
+  filename = "k3s_id_rsa"
+  content_base64  = var.ssh_key
+  file_permission = 0600
+}
+
+resource "local_file" "ssh_config" {
+  filename        = "ssh_config"
+  file_permission = 0600
+  content         = <<EOT
+Host k3s
+  HostName ${google_compute_address.static.address}
+  User rancher
+  IdentityFile ./k3s_id_rsa
+  IdentitiesOnly yes
+  StrictHostKeyChecking no 
+  UserKnownHostsFile /dev/null
+EOT
 }
 
 resource "local_file" "k8s-config" {

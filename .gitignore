@@ -1,0 +1,9 @@
+.profile
+.terraform
+.vscode
+config
+k3s_id_rsa
+ssh_config
+terraform.tfstate
+user-data.yaml
+terraform.tfstate.backup

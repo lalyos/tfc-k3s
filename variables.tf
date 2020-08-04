@@ -35,3 +35,7 @@ variable "k3os_token" {
   type = string
   default = "s3cr3t0k3n"
 }
+
+variable "ssh_key" {
+  type = string
+}

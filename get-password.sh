@@ -1,13 +1,9 @@
 #!/bin/bash
-
-SERVER_IP=$(jq -r .server_ip)
-: ${SERVER_IP:? required}
-
-pwd=$(
-  ssh -l rancher ${SERVER_IP} \
-    kubectl config view -o jsonpath='{.users[0].user.password}'
-)
-
 cat <<EOF
-{ "password" : "${pwd}" }
+{ 
+  "password" : "$(
+      ssh -F ssh_config k3s \
+        kubectl config view -o jsonpath='{.users[0].user.password}'
+    )" 
+}
 EOF
