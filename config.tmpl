@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Config
-clusters:                                                                                                                                
+clusters:
 - name: k3s
-  cluster:                                                                                                                               
-    insecure-skip-tls-verify: true                                                                                                       
-    server: https://${server_ip}:6443                                                                                               
+  cluster:
+    insecure-skip-tls-verify: true
+    server: https://${server_ip}:6443
 contexts:
 - context:
     cluster: k3s
