@@ -18,6 +18,17 @@ data "external" "password" {
   }
 }
 
+terraform {
+  backend "remote" {
+    hostname = "app.terraform.io"
+    organization = "lly"
+
+    workspaces {
+      name = "k3s"
+    }
+  }
+}
+
 resource "google_compute_address" "static" {
   name = "ipv4-address"
 }
