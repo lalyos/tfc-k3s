@@ -69,6 +69,7 @@ Host k3s
   IdentitiesOnly yes
   StrictHostKeyChecking no
   UserKnownHostsFile /dev/null
+  ConnectTimeout 1
 EOT
 }
 
